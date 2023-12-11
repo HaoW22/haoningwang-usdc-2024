@@ -26,7 +26,27 @@
         "SearchTerm": "",
         "Results": []
     };
-    
+
+    if (!Array.isArray(scannedTextObj) || scannedTextObj.length === 0) { // 0 books or wrong type
+        return result; 
+    }
+    let found_content = null; // init var to store data 
+    for (const book of scannedTextObj) { // Iterate through library/object
+        if (Object.keys(book).length === 0) { // skip empty
+            continue;
+        }
+        for (const bookData of book.Content) { // iterate through content of book
+            if (bookData.Text.includes(searchTerm)) { // check if search term is in line of text
+                found_content = {
+                    "ISBN": book.ISBN, // add ISBN
+                    "Page": bookData.Page, // add Page #
+                    "Line": bookData.Line // add Line #
+                };
+                result.Results.push(found_content); // push found result to overall result
+                break; 
+            }
+        }
+    }
     return result; 
 }
 
