@@ -36,6 +36,9 @@
             continue;
         }
         for (const bookData of book.Content) { // iterate through content of book
+            if (Object.keys(bookData).length === 0) { //skip empty
+                continue;
+            }
             if (bookData.Text.includes(searchTerm)) { // check if search term is in line of text
                 found_content = {
                     "ISBN": book.ISBN, // add ISBN
@@ -43,7 +46,6 @@
                     "Line": bookData.Line // add Line #
                 };
                 result.Results.push(found_content); // push found result to overall result
-                break; 
             }
         }
     }
@@ -211,14 +213,14 @@ const output9 = { // Test 9
 const output10 = { // Test 10
     "SearchTerm": "and",
     "Results": [
-        { ISBN: undefined, Page: 31, Line: 8 }
+        { ISBN: undefined, Page: 31, Line: 9 }
     ]
 }
 
 const output11 = { // Test 11
     "SearchTerm": "and",
     "Results": [
-        { ISBN: "9780000528531", Page: undefined, Line: 8 }
+        { ISBN: "9780000528531", Page: undefined, Line: 9 }
     ]
 }
 
@@ -274,7 +276,7 @@ const test1 = findSearchTermInBooks("the", input1);
 if (JSON.stringify(test1) === JSON.stringify(blank_the)) {
     console.log("PASS: Test 1 Haoning");
 } else {
-    console.log("PASS: Test 1 Haoning");
+    console.log("FAIL: Test 1 Haoning");
     console.log("Expected: ", blank_the);
     console.log("Recieved: ", test1);
 }
@@ -283,7 +285,7 @@ const test2 = findSearchTermInBooks("the", input2);
 if (JSON.stringify(test2) === JSON.stringify(blank_the)) {
     console.log("PASS: Test 2 Haoning");
 } else {
-    console.log("PASS: Test 2 Haoning");
+    console.log("FAIL: Test 2 Haoning");
     console.log("Expected: ", blank_the);
     console.log("Recieved: ", test2);
 }
@@ -292,7 +294,7 @@ const test3 = findSearchTermInBooks("the", input3);
 if (JSON.stringify(test3) === JSON.stringify(blank_the)) {
     console.log("PASS: Test 3 Haoning");
 } else {
-    console.log("PASS: Test 3 Haoning");
+    console.log("FAIL: Test 3 Haoning");
     console.log("Expected: ", blank_the);
     console.log("Recieved: ", test3);
 }
@@ -301,7 +303,7 @@ const test4 = findSearchTermInBooks("the", input4);
 if (JSON.stringify(test4) === JSON.stringify(blank_the)) {
     console.log("PASS: Test 4 Haoning");
 } else {
-    console.log("PASS: Test 4 Haoning");
+    console.log("FAIL: Test 4 Haoning");
     console.log("Expected: ", blank_the);
     console.log("Recieved: ", test4);
 }
@@ -310,7 +312,7 @@ const test5 = findSearchTermInBooks("simply", input4);
 if (JSON.stringify(test5) === JSON.stringify(output5)) {
     console.log("PASS: Test 5 Haoning");
 } else {
-    console.log("PASS: Test 5 Haoning");
+    console.log("FAIL: Test 5 Haoning");
     console.log("Expected: ", output5);
     console.log("Recieved: ", test5);
 }
@@ -319,7 +321,7 @@ const test6 = findSearchTermInBooks("momentous", input6);
 if (JSON.stringify(test6) === JSON.stringify(output6)) {
     console.log("PASS: Test 6 Haoning");
 } else {
-    console.log("PASS: Test 6 Haoning");
+    console.log("FAIL: Test 6 Haoning");
     console.log("Expected: ", output6);
     console.log("Recieved: ", test6);
 }
@@ -328,7 +330,7 @@ const test7 = findSearchTermInBooks("Flag", input6);
 if (JSON.stringify(test7) === JSON.stringify(output7)) {
     console.log("PASS: Test 7 Haoning");
 } else {
-    console.log("PASS: Test 7 Haoning");
+    console.log("FAIL: Test 7 Haoning");
     console.log("Expected: ", output7);
     console.log("Recieved: ", test7);
 }
@@ -337,7 +339,7 @@ const test8 = findSearchTermInBooks("simply", input8);
 if (JSON.stringify(test8) === JSON.stringify(output5)) {
     console.log("PASS: Test 8 Haoning");
 } else {
-    console.log("PASS: Test 8 Haoning");
+    console.log("FAIL: Test 8 Haoning");
     console.log("Expected: ", output5);
     console.log("Recieved: ", test8);
 }
@@ -346,7 +348,7 @@ const test9 = findSearchTermInBooks("dark-", input8);
 if (JSON.stringify(test9) === JSON.stringify(output9)) {
     console.log("PASS: Test 9 Haoning");
 } else {
-    console.log("PASS: Test 9 Haoning");
+    console.log("FAIL: Test 9 Haoning");
     console.log("Expected: ", output9);
     console.log("Recieved: ", test9);
 }
@@ -355,16 +357,17 @@ const test10 = findSearchTermInBooks("and", input10);
 if (JSON.stringify(test10) === JSON.stringify(output10)) {
     console.log("PASS: Test 10 Haoning");
 } else {
-    console.log("PASS: Test 10 Haoning");
+    console.log("FAIL: Test 10 Haoning");
     console.log("Expected: ", output10);
     console.log("Recieved: ", test10);
 }
 
-// const test11 = findSearchTermInBooks("and", input11);
-// if (JSON.stringify(test11) === JSON.stringify(output11)) {
-//     console.log("PASS: Test 11 Haoning");
-// } else {
-//     console.log("PASS: Test 11 Haoning");
-//     console.log("Expected: ", output11);
-//     console.log("Recieved: ", test11);
-// }
+const test11 = findSearchTermInBooks("and", input11);
+if (JSON.stringify(test11) === JSON.stringify(output11)) {
+    console.log("PASS: Test 11 Haoning");
+} else {
+    console.log("FAIL: Test 11 Haoning");
+    console.log("Expected: ", output11);
+    console.log("Recieved: ", test11);
+}
+
